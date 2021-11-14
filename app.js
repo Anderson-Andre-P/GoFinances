@@ -131,6 +131,88 @@ const Transaction = {
     }
 }
 
+// ===============================================
+
+let valores = []
+let valoresPositivos = []
+let valoresNegativos = []
+let datas = []
+let values = Transaction.all.forEach(values =>{
+    valores.push(values.amount / 100)
+    // if(values.amount >= 0) {
+    //     valoresPositivos.push(values.amount / 100)
+    // } else {
+    //     valoresNegativos.push(values.amount / 100)
+    // }
+    datas.push(values.description)
+})
+
+
+let ctx = document.getElementsByClassName('line-chart')
+
+let chartGraph = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: datas.map((valorData) => valorData),
+        datasets: [
+            {
+                label: 'R$',
+                data: valores.map((valorValue) => valorValue),
+                backgroundColor: [
+                    'rgba(12, 255, 255, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(12, 255, 255, 1)',
+                ],
+                borderWidth: 2,
+            },
+            // {
+            //     label: 'Gastos Positivos',
+            //     data: valoresPositivos.map((valorValue) => valorValue),
+            //     backgroundColor: [
+            //         'rgba(153, 102, 255, 0.2)',
+            //     ],
+            //     borderColor: [
+            //         'rgba(54, 162, 235, 1)',
+            //     ],
+            //     borderWidth: 2
+            // },
+            // {
+            //     label: 'Gastos Negativos',
+            //     data: valoresNegativos.map((valorValue) => valorValue),
+            //     backgroundColor: [
+            //         'rgba(255, 50, 100, 0.2)',
+            //     ],
+            //     borderColor: [
+            //         'rgba(255, 162, 235, 1)',
+            //     ],
+            //     borderWidth: 2
+            // },
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+              position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Gráfico de Gastos'
+            },
+        },
+        // scales: {
+        //     y: {
+        //         beginAtZero: true
+        //     }
+        // }
+    }
+});
+
+
+// ===============================================
+
+
 const DOM = {
     transactionsContainer: document.querySelector('#data-table tbody'),
 
@@ -274,6 +356,7 @@ const App = {
         DOM.updateBalance()
 
         Storage.set(Transaction.all)
+
     },
     
     reload(){

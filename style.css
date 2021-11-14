@@ -230,6 +230,19 @@ td.expense {
     color: #E1583C;
 }
 
+/* GRÁFICO =========================== */
+
+.grafico {
+    max-width: 800px;
+    margin: 60px auto;
+    text-align: center;
+}
+
+.grafico canvas {
+    max-width: 800px;
+    max-height: 400px;
+}
+
 /* MODAL =========================== */
 
 .modal-overlay {
