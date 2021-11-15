@@ -127,15 +127,15 @@ let values = Transaction.all.forEach(values =>{
     descricao.push(values.description)
 })
 
+let ctx = document.getElementsByClassName('line-chart')
+
 function colorize(opacidade) {
     return (ctx) => {
-      const v = ctx.parsed.y;
-      const c = v < 0 ? '#e92929' : '#57dd81';
-      return opacidade ? c : (c + 25);
+        const v = ctx.parsed.y;
+        const c = v < 0 ? '#e92929' : '#57dd81';
+        return opacidade ? c : (c + 25);
     };
 }
-
-let ctx = document.getElementsByClassName('line-chart')
 
 let chartGraph = new Chart(ctx, {
     type: 'bar',
@@ -145,6 +145,9 @@ let chartGraph = new Chart(ctx, {
             {
                 label: 'R$',
                 data: valores.map((valorValue) => valorValue),
+                backgroundColor: 'rgba(131, 41, 233, 0.2)',
+                borderColor: 'rgba(131, 41, 233, 1)',
+                borderWidth: 2,
             },
         ]
     },
@@ -162,7 +165,10 @@ let chartGraph = new Chart(ctx, {
                 title: {
                   display: true,
                   text: 'Descrição'
-                }
+                },
+                gridLines: {
+                    display: false,
+                },
             },
             y: {
                 beginAtZero: true,
@@ -170,18 +176,21 @@ let chartGraph = new Chart(ctx, {
                     display: true,
                     text: 'Valor - R$'
                 },
+                gridLines: {
+                    display: false,
+                },
                 ticks: {
                     stepSize: 250
                 }
             }
         },
-        elements: {
-            bar: {
-              backgroundColor: colorize(false),
-              borderColor: colorize(true),
-              borderWidth: 2
-            }
-        },
+        // elements: {
+        //     bar: {
+        //         backgroundColor: colorize(false),
+        //         borderColor: colorize(true),
+        //         borderWidth: 2
+        //     }
+        // },
         animation: {
             duration: 2000
         }
@@ -337,6 +346,7 @@ const App = {
     reload(){
         DOM.clearTransactions()
         App.init()
+        document.location.reload(true);
     },
 }
 

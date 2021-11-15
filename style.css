@@ -159,17 +159,19 @@ header h1#logo {
 }
 
 .card.total {
-    background: #40A95E;
+    /* background: #40A95E; */
+    background: rgb(131, 41, 233);
     color: #FFF;
 }
 
 .card.total.bg {
-    background: #e92929;
+    /* background: #e92929; */
+    background: rgb(131, 41, 233);
 }
 
 .card.total.default {
-    /* background: #8329e9; */
-    background: #40A95E;
+    background: rgb(131, 41, 233);
+    /* background: #40A95E; */
 }
 
 /* TABLE =========================== */
