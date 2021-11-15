@@ -1,5 +1,4 @@
 <h1 align="center">
-  Go.Finance$
   <img src="https://github.com/Anderson-Andre-P/GoFinances/blob/main/assets/logo.svg">
 </h1>
 
@@ -11,7 +10,7 @@
 </p>
 
 <h2 align="center">
-  <img alt="Demo do site" title="#Portfolio" src="">
+  <img alt="Demo do site" title="#Go.Finance$" src="https://github.com/Anderson-Andre-P/GoFinances/blob/main/Capa.png">
 </h2>
 
 ### Features
