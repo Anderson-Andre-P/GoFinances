@@ -50,25 +50,12 @@ const Transaction = {
     //         amount: -50000,
     //         date: '23/11/2021'
     //     },
-    //     {
-    //         // id: 2,
-    //         description: 'WEBSITE',
-    //         amount: 500000,
-    //         date: '23/11/2021'
-    //     },
-    //     {
-    //         // id: 3,
-    //         description: 'INTERNET',
-    //         amount: -2000000,
-    //         date: '23/11/2021'
-    //     },
     // ],
 
     all: Storage.get(),
 
     add(transaction) {
         Transaction.all.push(transaction)
-
         App.reload();
     },
 
@@ -131,84 +118,75 @@ const Transaction = {
     }
 }
 
-// ===============================================
+// GRÁFICO ===============================================
 
 let valores = []
-let valoresPositivos = []
-let valoresNegativos = []
-let datas = []
+let descricao = []
 let values = Transaction.all.forEach(values =>{
     valores.push(values.amount / 100)
-    // if(values.amount >= 0) {
-    //     valoresPositivos.push(values.amount / 100)
-    // } else {
-    //     valoresNegativos.push(values.amount / 100)
-    // }
-    datas.push(values.description)
+    descricao.push(values.description)
 })
 
+function colorize(opacidade) {
+    return (ctx) => {
+      const v = ctx.parsed.y;
+      const c = v < 0 ? '#e92929' : '#57dd81';
+      return opacidade ? c : (c + 25);
+    };
+}
 
 let ctx = document.getElementsByClassName('line-chart')
 
 let chartGraph = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: datas.map((valorData) => valorData),
+        labels: descricao.map((valorData) => valorData),
         datasets: [
             {
                 label: 'R$',
                 data: valores.map((valorValue) => valorValue),
-                backgroundColor: [
-                    'rgba(12, 255, 255, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(12, 255, 255, 1)',
-                ],
-                borderWidth: 2,
             },
-            // {
-            //     label: 'Gastos Positivos',
-            //     data: valoresPositivos.map((valorValue) => valorValue),
-            //     backgroundColor: [
-            //         'rgba(153, 102, 255, 0.2)',
-            //     ],
-            //     borderColor: [
-            //         'rgba(54, 162, 235, 1)',
-            //     ],
-            //     borderWidth: 2
-            // },
-            // {
-            //     label: 'Gastos Negativos',
-            //     data: valoresNegativos.map((valorValue) => valorValue),
-            //     backgroundColor: [
-            //         'rgba(255, 50, 100, 0.2)',
-            //     ],
-            //     borderColor: [
-            //         'rgba(255, 162, 235, 1)',
-            //     ],
-            //     borderWidth: 2
-            // },
         ]
     },
     options: {
         responsive: true,
         plugins: {
-            legend: {
-              position: 'top',
-            },
+            legend: false, 
             title: {
                 display: true,
-                text: 'Gráfico de Gastos'
+                text: 'Transações'
             },
         },
-        // scales: {
-        //     y: {
-        //         beginAtZero: true
-        //     }
-        // }
+        scales: {
+            x: {
+                title: {
+                  display: true,
+                  text: 'Descrição'
+                }
+            },
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Valor - R$'
+                },
+                ticks: {
+                    stepSize: 250
+                }
+            }
+        },
+        elements: {
+            bar: {
+              backgroundColor: colorize(false),
+              borderColor: colorize(true),
+              borderWidth: 2
+            }
+        },
+        animation: {
+            duration: 2000
+        }
     }
 });
-
 
 // ===============================================
 
@@ -352,16 +330,13 @@ const Form = {
 const App = {
     init(){
         Transaction.all.forEach(DOM.addTransaction)
-        
         DOM.updateBalance()
-
         Storage.set(Transaction.all)
-
     },
     
     reload(){
         DOM.clearTransactions()
-        App.init();
+        App.init()
     },
 }
 

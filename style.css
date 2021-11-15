@@ -168,7 +168,8 @@ header h1#logo {
 }
 
 .card.total.default {
-    background: #8329e9;
+    /* background: #8329e9; */
+    background: #40A95E;
 }
 
 /* TABLE =========================== */
@@ -227,7 +228,7 @@ td.income {
 }
 
 td.expense {
-    color: #E1583C;
+    color: #E92929;
 }
 
 /* GRÁFICO =========================== */
@@ -248,7 +249,7 @@ td.expense {
 .modal-overlay {
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: #00000080;
     position: fixed;
     top: 0;
     display: flex;
