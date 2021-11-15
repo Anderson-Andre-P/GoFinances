@@ -22,9 +22,9 @@
 
 ### Future Features
 
-- [] Botão para alterar entre Dark e Light theme
-- [] Fazer PWA
-- [] Fazer atualizações nos dados sem precisar dar refresh na página
+- [ ] Botão para alterar entre Dark e Light theme
+- [ ] Fazer PWA
+- [ ] Fazer atualizações nos dados sem precisar dar refresh na página
 
 
 <p>
